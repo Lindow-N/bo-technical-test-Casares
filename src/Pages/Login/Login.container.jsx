@@ -36,7 +36,10 @@ function LoginContainer() {
     Session.loadUser();
     const isAllowed =
       Session.user.hasModules([MODULES.WARREN]) && Session.user.hasRoles([ROLES.USE_NEWS]);
-    const landingPage = Session.user.homepage.toString();
+
+    console.log(isAllowed, 'isAllowed');
+
+    const landingPage = '/home';
 
     if (isAllowed) {
       history.push(landingPage);
@@ -46,13 +49,20 @@ function LoginContainer() {
     }
   };
 
-  const handleSubmit = (values) => {
+  const handleSubmit = async (values) => {
     setErrorMsg(null);
+    console.log('Submitting form with values:', values);
     try {
-      const auth = AuthAPI.login(values);
+      const auth = await AuthAPI.login(values);
+      console.log('Auth response:', auth);
+
       const headersWithToken = { ...headers, Authorization: `Bearer ${auth.accessToken}` };
-      const userMainData = UsersAPI.fetchMe(headersWithToken);
-      const userData = UsersAPI.fetchContext(headersWithToken);
+      const userMainData = await UsersAPI.fetchMe(headersWithToken);
+      console.log('User main data:', userMainData);
+
+      const userData = await UsersAPI.fetchContext(headersWithToken);
+      console.log('User context data:', userData);
+
       axios.defaults.headers.common = { ...headersWithToken, 'x-account-key': userData.accountKey };
       delete userData.password;
 
@@ -60,6 +70,7 @@ function LoginContainer() {
       setInitialLanguage(userMainData?.meta?.language);
       redirectUser();
     } catch (error) {
+      console.error('Error during login:', error);
       setErrorMsg('Connection error');
     }
   };
@@ -69,7 +80,7 @@ function LoginContainer() {
       setInitialLanguage(user?.meta?.language);
       redirectUser();
     }
-  }, []);
+  }, [user]);
 
   console.log('LoginContainer rendu');
 

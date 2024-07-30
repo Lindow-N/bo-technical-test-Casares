@@ -10,6 +10,9 @@ import NoPage from './NoPage';
 import Login from './Login';
 import NotAuthorized from './NotAuthorized';
 import Health from './Health';
+import Home from './Home';
+import VideosList from './Videos/VideosList';
+import VideoDetail from './Videos/VideoDetail';
 
 import Session from '../utils/Session';
 
@@ -45,9 +48,12 @@ function Router() {
       <Switch>
         <Route exact path="/" key="/" component={() => <Redirect to="/login" />} />
         <Route exact path="/login" key="/login" component={Login} />
+        <Route exact path="/home" key="/home" component={Home} />
         <Route exact path="/health" key="/health" component={Health} />
         <Route exact path="/forgotPassword" key="/forgotPassword" component={ForgotPassword} />
         <Route exact path="/reset-password" key="/reset-password" component={NewPassword} />
+        <Route path="/videos" exact component={VideosList} />
+        <Route path="/videos/:id" component={VideoDetail} />
         <Route exact path="/404" key="/404" component={NoPage} />
 
         <Layout>

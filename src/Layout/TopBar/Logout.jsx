@@ -1,7 +1,8 @@
 import React, { useEffect, useContext } from 'react';
 import Tooltip from '@material-ui/core/Tooltip';
-import ExitToAppRoundedIcon from '@material-ui/icons/ExitToAppRounded'; // import { IconButton } from '@material-ui/core';
+import ExitToAppRoundedIcon from '@material-ui/icons/ExitToAppRounded';
 import { IconButton } from '@material-ui/core';
+import { useHistory } from 'react-router-dom';
 
 import Session from '../../utils/Session';
 import { AuthAPI, fetchAdminPayload } from '../../utils/api/api';
@@ -10,6 +11,7 @@ import UserContext from '../../context/userContext';
 import AdminPayloadContext from '../../context/adminPayloadContext';
 
 function Logout() {
+  const history = useHistory();
   const { setUser } = useContext(UserContext);
   const { setAdminPayload } = useContext(AdminPayloadContext);
 
@@ -18,10 +20,14 @@ function Logout() {
   const userName = `${!!firstName ? firstName : ''} ${!!lastName ? lastName : ''}`;
 
   const handleLogout = async () => {
+    try {
+      await AuthAPI.logout();
+    } catch (err) {
+      console.error('Logout failed:', err);
+    }
     setUser({});
     Session.logout();
-    await AuthAPI.logout();
-    window.location.reload();
+    history.push('/login');
   };
 
   const getPayload = async () => {

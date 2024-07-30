@@ -24,7 +24,7 @@ function TopBar() {
             </Typography>
           </Button>
           <div className={styles.rightItemsWrapper}>
-            <LanguageSelect />
+            {/* <LanguageSelect /> */}
             <Logout />
           </div>
         </Toolbar>

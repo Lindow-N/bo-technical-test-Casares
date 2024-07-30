@@ -20,36 +20,39 @@ const LoginFormView = ({ onSubmit }) => (
   <Form
     onSubmit={onSubmit}
     validate={validate}
-    render={({ handleSubmit, submitting, pristine }) => (
-      <form onSubmit={handleSubmit} className={styles.form}>
-        <Grid container spacing={2}>
-          <Grid item xs={12}>
-            <Field
-              name="username"
-              component={RenderTextInput}
-              label="Username"
-              type="text"
-              fullWidth
-            />
+    render={({ handleSubmit, submitting, pristine, values }) => {
+      const isDisabled = submitting || pristine || !values.username || !values.password;
+      return (
+        <form onSubmit={handleSubmit} className={styles.form}>
+          <Grid container spacing={2}>
+            <Grid item xs={12}>
+              <Field
+                name="username"
+                component={RenderTextInput}
+                label="Username"
+                type="text"
+                fullWidth
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <Field
+                name="password"
+                component={RenderTextInput}
+                label="Password"
+                type="password"
+                fullWidth
+              />
+            </Grid>
           </Grid>
-          <Grid item xs={12}>
-            <Field
-              name="password"
-              component={RenderTextInput}
-              label="Password"
-              type="password"
-              fullWidth
-            />
-          </Grid>
-        </Grid>
-        <div>
-          <PrimaryButton type="submit" label="Login" disabled={submitting || pristine} />
-        </div>
-        <a href="/forgotPassword" className={styles.link}>
-          Forgot password?
-        </a>
-      </form>
-    )}
+          <div>
+            <PrimaryButton type="submit" label="Login" disabled={isDisabled} />
+          </div>
+          <a href="/forgotPassword" className={styles.link}>
+            Forgot password?
+          </a>
+        </form>
+      );
+    }}
   />
 );
 

@@ -32,7 +32,7 @@ const legalText =
   '©2021 All rights reserved. On Rewind® is a registered trademark of Origins Digital, a subsidiary of EMG.';
 
 // App general configuration
-const menuTitle = 'App Title';
+const menuTitle = 'bo-technical-test';
 const awsPrefix = 'test-apps/'; // the sub directory to store uploaded assets
 
 export default config;
