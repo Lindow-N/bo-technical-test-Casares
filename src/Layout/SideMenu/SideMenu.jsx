@@ -10,7 +10,6 @@ import styles from './sideMenu.module.scss';
 import MENU_ENTRIES from '../../menuConfig';
 import Session from '../../utils/Session';
 
-// Définir useStyles en dehors du composant fonctionnel
 const useStyles = makeStyles(() => ({
   indicator: {
     backgroundColor: '#fff',

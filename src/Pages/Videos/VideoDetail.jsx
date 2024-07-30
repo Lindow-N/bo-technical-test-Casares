@@ -5,7 +5,6 @@ import Modal from '@material-ui/core/Modal';
 import Button from '@material-ui/core/Button';
 import styles from './videoDetail.module.scss';
 
-// Composant pour afficher un modal avec le payload
 const PayloadModal = ({ open, handleClose, payload }) => (
   <Modal open={open} onClose={handleClose}>
     <div className={styles.modalContent}>
@@ -20,7 +19,6 @@ function VideoDetail() {
   const { id } = useParams();
   const [open, setOpen] = useState(false);
 
-  // Liste fictive de vidéos
   const videos = [
     { id: 1, title: 'Video 1', description: 'Description 1' },
     { id: 2, title: 'Video 2', description: 'Description 2' },
@@ -34,7 +32,6 @@ function VideoDetail() {
   const handleSubmit = (e) => {
     e.preventDefault();
     const payload = { id, title, description };
-    // Affiche le payload dans un modal
     setOpen(true);
   };
 

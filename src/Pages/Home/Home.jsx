@@ -1,4 +1,3 @@
-// src/Pages/Home/Home.jsx
 import React, { useEffect, useState } from 'react';
 import Layout from '../../Layout';
 import Session from '../../utils/Session';
@@ -8,7 +7,6 @@ function Home() {
   const [userData, setUserData] = useState(null);
 
   useEffect(() => {
-    // Récupérer les données utilisateur depuis la session
     const user = Session.user.data;
     setUserData(user);
     console.log('User Data:', user);

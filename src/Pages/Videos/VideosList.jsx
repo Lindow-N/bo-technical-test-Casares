@@ -7,7 +7,6 @@ import styles from './videosList.module.scss';
 function VideosList() {
   const history = useHistory();
 
-  // Liste fictive de vidéos
   const videos = [
     { id: 1, title: 'Video 1' },
     { id: 2, title: 'Video 2' },
