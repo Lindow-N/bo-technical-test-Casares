@@ -44,21 +44,11 @@ function Router() {
     <BrowserRouter>
       <Switch>
         <Route exact path="/" key="/" component={() => <Redirect to="/login" />} />
-        <Route exact path="/login" key="/login" component={() => <Login />} />
-        <Route exact path="/health" key="/health" component={() => <Health />} />
-        <Route
-          exact
-          path="/forgotPassword"
-          key="/forgotPassword"
-          component={() => <ForgotPassword />}
-        />
-        <Route
-          exact
-          path="/reset-password"
-          key="/reset-password"
-          component={() => <NewPassword />}
-        />
-        <Route exact path="/404" key="/404" component={() => <NoPage />} />
+        <Route exact path="/login" key="/login" component={Login} />
+        <Route exact path="/health" key="/health" component={Health} />
+        <Route exact path="/forgotPassword" key="/forgotPassword" component={ForgotPassword} />
+        <Route exact path="/reset-password" key="/reset-password" component={NewPassword} />
+        <Route exact path="/404" key="/404" component={NoPage} />
 
         <Layout>
           {MENU_ENTRIES.map((entry, index) => {
@@ -66,7 +56,6 @@ function Router() {
             return <AuthRoute entry={entry} key={`${path}${index}`} index={index} />;
           })}
         </Layout>
-        {/* to be updated when we'll get user auth */}
         <Route path="*" component={() => <Redirect to="/404" />} />
       </Switch>
     </BrowserRouter>
